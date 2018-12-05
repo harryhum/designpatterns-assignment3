@@ -1,6 +1,7 @@
 package dto;
 
 import java.sql.Date;
+import java.util.Objects;
 
 /**
  *
@@ -15,7 +16,7 @@ public class StudentGroupMatch {
     private int groupID;
     private int studentID;
     private Date date;
-    
+
     public StudentGroupMatch(){}
     
     public StudentGroupMatch(int group_id, int student_id) {
@@ -48,4 +49,29 @@ public class StudentGroupMatch {
         this.date = date;
     }
 
+    
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + this.groupID;
+        hash = 29 * hash + this.studentID;
+        hash = 29 * hash + Objects.hashCode(this.date);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final StudentGroupMatch other = (StudentGroupMatch) obj;
+        return true;
+    }
+       
 }

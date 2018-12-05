@@ -4,6 +4,7 @@ import dataaccess.StudentGroupMatchDAO;
 import dataaccess.StudentGroupMatchDAOImpl;
 import java.util.List;
 import dto.StudentGroupMatch;
+import dto.factory.StudentGroupMatchFactory;
 import java.util.Map;
 
 /**
@@ -23,9 +24,10 @@ public class StudentGroupMatchLogic {
         return studentGroupMatchDAO.getAllMatches();
     }
 
+    //use builder
     public void addMatch(Map<String, String[]> match) {
-        StudentGroupMatch m = new StudentGroupMatch(Integer.parseInt(match.get(StudentGroupMatch.COL_GROUP_ID)[0]), Integer.parseInt(match.get(StudentGroupMatch.COL_STUDENT_ID)[0]));
-        studentGroupMatchDAO.addMatch(m);
+        StudentGroupMatchFactory factory = new StudentGroupMatchFactory();
+        studentGroupMatchDAO.addMatch(factory.createFromMap(match));
     }
     
     public StudentGroupMatch getMatchByStudentID(int id) {

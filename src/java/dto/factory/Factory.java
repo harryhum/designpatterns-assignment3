@@ -43,5 +43,5 @@ public interface Factory< T> {
      * @param map - DTO values are stored in map values while keys represent the variable
      * @return created DTO object, null if failed
      */
-    T createFromMap(Map<String, int[]> map);
+    T createFromMap(Map<String, String[]> map);
 }

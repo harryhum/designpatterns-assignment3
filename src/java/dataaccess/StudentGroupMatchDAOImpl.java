@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import dto.StudentGroupMatch;
 import java.sql.Date;
 import javax.naming.NamingException;
-
+import dto.factory.StudentGroupMatchFactory;
 /**
  *
  * @author Shawn
@@ -33,12 +33,10 @@ public class StudentGroupMatchDAOImpl implements StudentGroupMatchDAO {
         try (Connection con = DataSource.createConnection();
                 PreparedStatement pstmt = con.prepareStatement(GET_ALL_MATCHES);
                 ResultSet rs = pstmt.executeQuery();) {
-            matches = new ArrayList<>(100);
+            matches = new ArrayList<>(100);            
             while (rs.next()) {
-                match = new StudentGroupMatch();
-                match.setGroupID(rs.getInt("group_id"));
-                match.setStudentID(rs.getInt("student_id"));
-                match.setDate(rs.getDate("date"));
+                StudentGroupMatchFactory factory = new StudentGroupMatchFactory();
+                match = factory.createFromResultSet(rs);
                 matches.add(match);
             }
         } catch (SQLException | NamingException ex) {
@@ -69,9 +67,8 @@ public class StudentGroupMatchDAOImpl implements StudentGroupMatchDAO {
                 ResultSet rs = pstmt.executeQuery();) {
             matches = new ArrayList<>(100);
             while (rs.next()) {
-                match = new StudentGroupMatch();
-                match.setGroupID(rs.getInt("group_id"));
-                match.setStudentID(rs.getInt("student_id"));
+                StudentGroupMatchFactory factory = new StudentGroupMatchFactory();
+                match = factory.createFromResultSet(rs);
                 matches.add(match);
             }
         } catch (SQLException | NamingException ex) {
@@ -88,10 +85,8 @@ public class StudentGroupMatchDAOImpl implements StudentGroupMatchDAO {
                     pstmt.setInt(1, studentID);
                     try(ResultSet rs = pstmt.executeQuery()) {
                         if (rs.next()) {
-                            match = new StudentGroupMatch();
-                            match.setGroupID(rs.getInt(StudentGroupMatch.COL_GROUP_ID));
-                            match.setStudentID(rs.getInt(StudentGroupMatch.COL_STUDENT_ID));
-                            match.setDate(rs.getDate(StudentGroupMatch.COL_DATE));
+                            StudentGroupMatchFactory factory = new StudentGroupMatchFactory();
+                            match = factory.createFromResultSet(rs);
                     }
                 }            
             }

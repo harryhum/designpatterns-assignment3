@@ -16,23 +16,24 @@ public class StudentGroupMatchFactory extends AbstractFactory<StudentGroupMatch>
 
     @Override
     public StudentGroupMatch createFromResultSet(ResultSet rs) throws SQLException {
-        if (rs == null || !rs.next()) {
+        if (rs == null) {
             return null;
         }
         StudentGroupMatchBuilder builder = new StudentGroupMatchBuilder();
         builder.setGroupID(rs.getInt(StudentGroupMatch.COL_GROUP_ID))
-                .setStudentID(rs.getInt(StudentGroupMatch.COL_STUDENT_ID));
+                .setStudentID(rs.getInt(StudentGroupMatch.COL_STUDENT_ID))
+                .setDate(rs.getDate(StudentGroupMatch.COL_DATE));
         return builder.get();
     }
 
     @Override
-    public StudentGroupMatch createFromMap(Map<String, int[]> map) {
+    public StudentGroupMatch createFromMap(Map<String, String[]> map) {
         if (map == null || map.isEmpty()) {
             return null;
         }
         StudentGroupMatchBuilder builder = new StudentGroupMatchBuilder();
-        builder.setGroupID(map.get(StudentGroupMatch.COL_GROUP_ID)[0])
-                .setStudentID(map.get(StudentGroupMatch.COL_STUDENT_ID)[0]);
+        builder.setGroupID(Integer.parseInt(map.get(StudentGroupMatch.COL_GROUP_ID)[0]))
+                .setStudentID(Integer.parseInt(map.get(StudentGroupMatch.COL_STUDENT_ID)[0]));
         return builder.get();
     }
 }

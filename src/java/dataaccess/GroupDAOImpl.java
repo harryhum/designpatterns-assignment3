@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import dto.Group;
 import dto.factory.DTOFactoryCreator;
 import dto.factory.Factory;
+import dto.factory.GroupFactory;
 import java.util.ArrayList;
 import javax.naming.NamingException;
 
@@ -29,6 +30,10 @@ public class GroupDAOImpl implements DAOInterface<Group> {
 
     private final Factory<Group> factory = DTOFactoryCreator.createFactory(Group.class);
 
+    /**
+     * 
+     * @return all the groups in the db
+     */
     @Override
     public List<Group> getAll() {
         List<Group> groups = Collections.emptyList();
@@ -51,6 +56,10 @@ public class GroupDAOImpl implements DAOInterface<Group> {
         return groups;
     }
 
+    /**
+     * 
+     * @param group to add to the db
+     */
     @Override
     public void add(Group group) {
         try (Connection con = DataSource.createConnection();
@@ -96,20 +105,29 @@ public class GroupDAOImpl implements DAOInterface<Group> {
         }
     }
 
+  
+    
     @Override
     public Group getById(String id) {
-        
+        Group s = null;
         try (Connection con = DataSource.createConnection();
                 PreparedStatement pstmt = con.prepareStatement(GET_BY_ID_GROUPS);) {
             pstmt.setInt(1, Integer.valueOf(id));
             ResultSet rs = pstmt.executeQuery();
-            Group g = new Group();
-            g.setId(rs.getInt(Group.ID));
-            g.setName(rs.getString(Group.NAME));
-            return g;
+            
+            //ResultSet rs = pstmt.executeQuery()
+            if (rs.next()) {
+                GroupFactory factory = new GroupFactory();
+                s= factory.createFromResultSet(rs);
+                 
+                }
         } catch (SQLException | NamingException ex) {
             Logger.getLogger(GroupDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+            
         }
+        return s;
     }
+    
+    
+    
 }

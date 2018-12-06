@@ -14,8 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author Shariar
+ * Servlet which provides input for user to add matches to the database
+ * 
+ * @author Harry Hum
  */
 public class StudentGroupMatchForm extends HttpServlet {
 
@@ -33,7 +34,6 @@ public class StudentGroupMatchForm extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -68,6 +68,11 @@ public class StudentGroupMatchForm extends HttpServlet {
         }
     }
 
+    /**
+     * Creates a string version of a map of strings
+     * @param values
+     * @return string
+     */
     private String toStringMap(Map<String, String[]> values) {
         StringBuilder builder = new StringBuilder();
         values.forEach((k, v) -> builder.append("Key=").append(k)

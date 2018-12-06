@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dataaccess;
 
 import java.sql.Connection;
@@ -12,20 +7,33 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 /**
- *
- * @author Shariar
+ * Singleton DataSource SQL connection class
+ * 
+ * @author Harry Hum
  */
 public class DataSource {
     
+    /**
+     * Static constant for DataSource class object
+     */
     private final static DataSource DATA_SOURCE = new DataSource();
     
+    /**
+     * SQL DataSource object
+     */
     private javax.sql.DataSource ds;
 
-    private DataSource() {
-    }
+    /**
+     * Default constructor
+     */
+    private DataSource() {}
 
+    /**
+     * Initialize SQL DataSource
+     * @throws NamingException 
+     */
     private void init() throws NamingException{
-        if (ds!=null) {
+        if (ds != null) {
             return;
         }
         Context initContext = new InitialContext();
@@ -33,12 +41,19 @@ public class DataSource {
         ds = (javax.sql.DataSource) envContext.lookup("jdbc/Registrar");
     }
     
+    /**
+     * Get connection from SQL DataSource
+     * @return Connection from SQL DataSource object
+     * @throws SQLException 
+     */
     private Connection getConnection() throws SQLException{
         return ds.getConnection();
     }
     
     /**
-     * Only use one connection for this application, prevent memory leaks.
+     * Initialize DataSource class
+     * Only use one connection for this application, prevent memory leaks
+     * @return the connection from SQL DataSource object
      */
     public static Connection createConnection() throws SQLException, NamingException {
         DATA_SOURCE.init();

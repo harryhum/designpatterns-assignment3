@@ -13,12 +13,17 @@ import dto.StudentGroupMatch;
 import java.sql.Date;
 import javax.naming.NamingException;
 import dto.factory.StudentGroupMatchFactory;
+
 /**
- *
- * @author Shawn
+ * Implementation of StudentGroupMatchDAO
+ * 
+ * @author Harry Hum
  */
 public class StudentGroupMatchDAOImpl implements StudentGroupMatchDAO {
 
+    /**
+     * SQL query strings
+     */
     private static final String GET_ALL_MATCHES = "SELECT * FROM StudentGroupMatch";
     private static final String INSERT_MATCHES = "INSERT INTO StudentGroupMatch (group_id, student_id, date) VALUES(?, ?, ?)";
     private static final String DELETE_MATCHES = "DELETE FROM StudentGroupMatch WHERE group_id = ? AND student_id = ?";
@@ -26,6 +31,10 @@ public class StudentGroupMatchDAOImpl implements StudentGroupMatchDAO {
     private static final String GET_BY_ID_STUDENT = "SELECT * FROM StudentGroupMatch WHERE student_id = ?";
     private static final String GET_BY_ID_GROUP = "SELECT * FROM StudentGroupMatch WHERE group_id = ?";
 
+    /**
+     * Gets all matches in the database
+     * @return list of StudentGroupMatch
+     */
     @Override
     public List<StudentGroupMatch> getAllMatches() {
         List<StudentGroupMatch> matches = Collections.emptyList();
@@ -45,6 +54,10 @@ public class StudentGroupMatchDAOImpl implements StudentGroupMatchDAO {
         return matches;
     }
 
+    /**
+     * Adds a match to the database
+     * @param match 
+     */
     @Override
     public void addMatch(StudentGroupMatch match) {
         try (Connection con = DataSource.createConnection();
@@ -58,25 +71,11 @@ public class StudentGroupMatchDAOImpl implements StudentGroupMatchDAO {
         }
     }
 
-    @Override
-    public List<StudentGroupMatch> getMatchesByGroupID(int groupID) {
-        List<StudentGroupMatch> matches = Collections.emptyList();
-        StudentGroupMatch match;
-        try (Connection con = DataSource.createConnection();
-                PreparedStatement pstmt = con.prepareStatement(GET_BY_ID_GROUP);
-                ResultSet rs = pstmt.executeQuery();) {
-            matches = new ArrayList<>(100);
-            while (rs.next()) {
-                StudentGroupMatchFactory factory = new StudentGroupMatchFactory();
-                match = factory.createFromResultSet(rs);
-                matches.add(match);
-            }
-        } catch (SQLException | NamingException ex) {
-            Logger.getLogger(StudentGroupMatchDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return matches;
-    }
-
+    /**
+     * Gets a match by student id
+     * @param studentID
+     * @return StudentGroupMatch object
+     */
     @Override
     public StudentGroupMatch getMatchByStudentID(int studentID) {
         StudentGroupMatch match = null;
@@ -96,13 +95,28 @@ public class StudentGroupMatchDAOImpl implements StudentGroupMatchDAO {
         return match;
     }
 
+    /**
+     * Unimplemented method
+     * @param match 
+     */
     @Override
     public void updateMatch(StudentGroupMatch match) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Delete match from database
+     * @param match 
+     */
     @Override
     public void deleteMatch(StudentGroupMatch match) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try (Connection con = DataSource.createConnection()) {
+            PreparedStatement pstmt = con.prepareStatement(DELETE_MATCHES); 
+            pstmt.setInt(1, match.getGroupID());
+            pstmt.setInt(2, match.getStudentID());
+            pstmt.executeQuery();
+        } catch (SQLException | NamingException ex) {
+            Logger.getLogger(StudentGroupMatchDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

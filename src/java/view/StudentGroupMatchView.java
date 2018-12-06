@@ -12,13 +12,22 @@ import dto.StudentGroupMatch;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 /**
- *
+ * Servlet which displays the matches table and provides a search by student id
+ * 
  * @author Harry Hum
  */
 public class StudentGroupMatchView extends HttpServlet {
     
+    /**
+     * Error message
+     */
      private String errorMessage = null;
+     
+     /**
+      * Determines if a search was conducted
+      */
      private boolean search = false;
     
     /**
@@ -43,9 +52,12 @@ public class StudentGroupMatchView extends HttpServlet {
             StudentGroupMatchLogic logic = new StudentGroupMatchLogic();
             List<StudentGroupMatch> matches = new ArrayList<>();
             
+            // Add search results to match list if a search was conducted, or add all matches if not
             if (search) {
                 Logger.getLogger(StudentGroupMatchView.class.getName()).log(Level.INFO, request.getParameter(StudentGroupMatch.COL_STUDENT_ID));
                 int searchID = Integer.parseInt(request.getParameter(StudentGroupMatch.COL_STUDENT_ID));
+                
+                // Add search result to matches if results match search params, or configure error message and add all matches if not
                 if (logic.getMatchByStudentID(searchID) != null) {
                     matches.add(logic.getMatchByStudentID(searchID));
                 }
@@ -64,7 +76,8 @@ public class StudentGroupMatchView extends HttpServlet {
             out.println("<th>Group ID</th>");
             out.println("<th>Date</th>");
             out.println("</tr>");
-  
+            
+            // Display error message if not null, or display matches if no error
             if (matches == null || matches.isEmpty()) {
                 errorMessage = "No matches found.";
             } else {
@@ -98,6 +111,7 @@ public class StudentGroupMatchView extends HttpServlet {
             out.println("</div>");
             out.println("</div>");
             
+            // Reset search to false and error message to null
             search = false;
             errorMessage = null;
         }

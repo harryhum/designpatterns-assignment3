@@ -5,12 +5,8 @@
         <group>
             <file>file:/C:/Users/Harry%20Hum/Documents/NetBeansProjects/Assignment3/src/java/business/StudentGroupMatchLogic.java</file>
             <file>file:/C:/Users/Harry%20Hum/Documents/NetBeansProjects/Assignment3/src/java/dataaccess/StudentGroupMatchDAOImpl.java</file>
-            <file>file:/C:/Users/Harry%20Hum/Documents/NetBeansProjects/Assignment3/src/java/dto/StudentGroupMatch.java</file>
-            <file>file:/C:/Users/Harry%20Hum/Documents/NetBeansProjects/Assignment3/src/java/view/StudentGroupMatchForm.java</file>
-            <file>file:/C:/Users/Harry%20Hum/Documents/NetBeansProjects/Assignment3/src/java/dataaccess/StudentGroupMatchDAO.java</file>
-            <file>file:/C:/Users/Harry%20Hum/Documents/NetBeansProjects/Assignment3/src/java/view/StudentGroupMatchSearch.java</file>
-            <file>file:/C:/Users/Harry%20Hum/Documents/NetBeansProjects/Assignment3/web/index.html</file>
-            <file>file:/C:/Users/Harry%20Hum/Documents/NetBeansProjects/Assignment3/src/java/view/StudentGroupMatchView.java</file>
+            <file>file:/C:/Users/Harry%20Hum/Documents/NetBeansProjects/Assignment3/src/java/dto/factory/StudentGroupMatchFactory.java</file>
+            <file>file:/C:/Users/Harry%20Hum/Documents/NetBeansProjects/Assignment3/test/logic/TestCoursesLogic.java</file>
         </group>
     </open-files>
 </project-private>

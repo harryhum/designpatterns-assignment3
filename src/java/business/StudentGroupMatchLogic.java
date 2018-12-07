@@ -1,6 +1,5 @@
 package business;
 
-import dataaccess.StudentGroupMatchDAO;
 import dataaccess.StudentGroupMatchDAOImpl;
 import java.util.List;
 import dto.StudentGroupMatch;
@@ -17,7 +16,7 @@ public class StudentGroupMatchLogic {
     /**
      * StudentGroupMatchDAO object
      */
-    private StudentGroupMatchDAO studentGroupMatchDAO = null;
+    private StudentGroupMatchDAOImpl studentGroupMatchDAO = null;
 
     /**
      * Constructor initializes StudentGroupMatchDAO object

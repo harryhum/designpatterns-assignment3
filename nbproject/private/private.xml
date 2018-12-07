@@ -5,6 +5,12 @@
         <group>
             <file>file:/C:/Users/Harry%20Hum/Documents/NetBeansProjects/Assignment3/src/java/business/StudentGroupMatchLogic.java</file>
             <file>file:/C:/Users/Harry%20Hum/Documents/NetBeansProjects/Assignment3/src/java/dataaccess/StudentGroupMatchDAOImpl.java</file>
+            <file>file:/C:/Users/Harry%20Hum/Documents/NetBeansProjects/Assignment3/src/java/dto/factory/DTOFactoryCreator.java</file>
+            <file>file:/C:/Users/Harry%20Hum/Documents/NetBeansProjects/Assignment3/src/java/dataaccess/DAOInterface.java</file>
+            <file>file:/C:/Users/Harry%20Hum/Documents/NetBeansProjects/Assignment3/src/java/dto/factory/AbstractFactory.java</file>
+            <file>file:/C:/Users/Harry%20Hum/Documents/NetBeansProjects/Assignment3/src/java/dto/StudentGroupMatch.java</file>
+            <file>file:/C:/Users/Harry%20Hum/Documents/NetBeansProjects/Assignment3/src/java/view/StudentGroupMatchForm.java</file>
+            <file>file:/C:/Users/Harry%20Hum/Documents/NetBeansProjects/Assignment3/src/java/dto/builder/StudentGroupMatchBuilder.java</file>
             <file>file:/C:/Users/Harry%20Hum/Documents/NetBeansProjects/Assignment3/src/java/dto/factory/StudentGroupMatchFactory.java</file>
             <file>file:/C:/Users/Harry%20Hum/Documents/NetBeansProjects/Assignment3/test/logic/TestCoursesLogic.java</file>
         </group>

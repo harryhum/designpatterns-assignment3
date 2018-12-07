@@ -56,6 +56,7 @@ public class StudentGroupMatchForm extends HttpServlet {
                 out.println(errorMessage);
                 out.println("</font>");
                 out.println("</p>");
+                errorMessage = null;
             }
             out.println("<pre>");
             out.println("Submitted keys and values:");
@@ -111,9 +112,10 @@ public class StudentGroupMatchForm extends HttpServlet {
             StudentGroupMatchLogic logic = new StudentGroupMatchLogic();
             try{
                 logic.addMatch(request.getParameterMap());
-            }catch(Exception e){
+            } catch (NumberFormatException e) {
+                errorMessage = "Please enter a valid number.";
+            } catch(Exception e) {
                 Logger.getLogger(StudentGroupMatchForm.class.getName()).log(Level.SEVERE, null, e);
-                errorMessage = "Unable to add StudentGroupMatch";
             }
         };
         if( request.getParameter("add")!=null){
@@ -121,6 +123,7 @@ public class StudentGroupMatchForm extends HttpServlet {
             processRequest(request, response);
         } else if (request.getParameter("view")!=null) {
             addMatch.run();
+            errorMessage = null;
             response.sendRedirect("StudentGroupMatchView");
         }
     }

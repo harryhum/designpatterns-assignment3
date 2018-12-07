@@ -12,14 +12,21 @@ import java.util.logging.Logger;
 import dto.StudentGroupMatch;
 import java.sql.Date;
 import javax.naming.NamingException;
-import dto.factory.StudentGroupMatchFactory;
+import dto.factory.DTOFactoryCreator;
+import dto.factory.Factory;
+
 
 /**
  * Implementation of StudentGroupMatchDAO
  * 
  * @author Harry Hum
  */
-public class StudentGroupMatchDAOImpl implements StudentGroupMatchDAO {
+public class StudentGroupMatchDAOImpl implements DAOInterface<StudentGroupMatch> {
+    
+    /**
+     * StudentGroupMatch factory 
+     */
+    private final Factory<StudentGroupMatch> factory = DTOFactoryCreator.createFactory(StudentGroupMatch.class);
 
     /**
      * SQL query strings
@@ -44,7 +51,6 @@ public class StudentGroupMatchDAOImpl implements StudentGroupMatchDAO {
                 ResultSet rs = pstmt.executeQuery();) {
             matches = new ArrayList<>(100);            
             while (rs.next()) {
-                StudentGroupMatchFactory factory = new StudentGroupMatchFactory();
                 match = factory.createFromResultSet(rs);
                 matches.add(match);
             }
@@ -84,7 +90,6 @@ public class StudentGroupMatchDAOImpl implements StudentGroupMatchDAO {
                     pstmt.setInt(1, studentID);
                     try(ResultSet rs = pstmt.executeQuery()) {
                         if (rs.next()) {
-                            StudentGroupMatchFactory factory = new StudentGroupMatchFactory();
                             match = factory.createFromResultSet(rs);
                     }
                 }            

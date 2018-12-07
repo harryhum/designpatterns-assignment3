@@ -6,6 +6,7 @@ import dto.Group;
 import dataaccess.DAOInterface;
 import dto.factory.DTOFactoryCreator;
 import dto.factory.Factory;
+import dto.factory.GroupFactory;
 import java.util.Map;
 
 /**
@@ -33,25 +34,30 @@ public class GroupLogic {
         return dao.getById(id);
         
     }
-    public void addCourse(Map<String, String[]> course) throws ValidationException {
-        //addCourse( factory.createFromMap(course));
-        Group c = new Group((course.get(Group.NAME)[0]), Integer.valueOf(course.get(Group.ID)[0]));
-        addCourse(c);
+    public void addGroup(Map<String, String[]> match) throws ValidationException {
+        //addGroup( factory.createFromMap(course));
+        //Group c = new Group((course.get(Group.NAME)[0]), Integer.valueOf(course.get(Group.ID)[0]));
+        
+        GroupFactory factory = new GroupFactory();
+        dao.add(factory.createFromMap(match));
+        
+        
+        //addGroup(c);
     }
 
-    public void addCourse(Group s) throws ValidationException {
+    public void addGroup(Group s) throws ValidationException {
         validateGroup(s);
         cleanGroup(s);
         dao.add(s);
     }
 
-    public void deleteCourses(String[] ids) throws ValidationException {
+    public void deleteGroups(String[] ids) throws ValidationException {
         for (String id : ids) {
-            deleteCourse(id);
+            deleteGroup(id);
         }
     }
 
-    public void deleteCourse(String id) throws ValidationException {
+    public void deleteGroup(String id) throws ValidationException {
         dao.delete(id);
     }
 

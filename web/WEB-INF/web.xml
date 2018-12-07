@@ -4,10 +4,33 @@
         <servlet-name>StudentGroupMatchForm</servlet-name>
         <servlet-class>view.StudentGroupMatchForm</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>GroupForm</servlet-name>
+        <servlet-class>view.GroupForm</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>StudentForm</servlet-name>
+        <servlet-class>view.StudentForm</servlet-class>
+    </servlet>
+    
     <servlet>
         <servlet-name>StudentGroupMatchView</servlet-name>
         <servlet-class>view.StudentGroupMatchView</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>GroupView</servlet-name>
+        <servlet-class>view.GroupView</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>StudentView</servlet-name>
+        <servlet-class>view.StudentView</servlet-class>
+    </servlet>
+    
+
     <servlet-mapping>
         <servlet-name>StudentGroupMatchView</servlet-name>
         <url-pattern>/StudentGroupMatchView</url-pattern>
@@ -16,6 +39,32 @@
         <servlet-name>StudentGroupMatchForm</servlet-name>
         <url-pattern>/StudentGroupMatchForm</url-pattern>
     </servlet-mapping>
+    
+    
+    <servlet-mapping>
+        <servlet-name>GroupView</servlet-name>
+        <url-pattern>/GroupView</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>StudentView</servlet-name>
+        <url-pattern>/StudentView</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>GroupForm</servlet-name>
+        <url-pattern>/GroupForm</url-pattern>
+    </servlet-mapping>
+    
+        <servlet-mapping>
+        <servlet-name>StudentForm</servlet-name>
+        <url-pattern>/StudentForm</url-pattern>
+    </servlet-mapping>
+    
+    
+    
+    
+    
     <session-config>
         <session-timeout>
             30

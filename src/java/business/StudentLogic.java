@@ -6,6 +6,7 @@ import dto.Student;
 import dataaccess.DAOInterface;
 import dto.factory.DTOFactoryCreator;
 import dto.factory.Factory;
+import dto.factory.StudentFactory;
 import java.util.Map;
 
 /**
@@ -33,10 +34,15 @@ public class StudentLogic {
         return dao.getById(id);
         
     }
-    public void addStudent(Map<String, String[]> course) throws ValidationException {
+    public void addStudent(Map<String, String[]> match) throws ValidationException {
         //addStudent( factory.createFromMap(course));
-        Student c = new Student((course.get(Student.FIRST_NAME)[0]), course.get(Student.LAST_NAME)[0], Integer.valueOf(course.get(Student.ID)[0]));
-        addStudent(c);
+        
+        StudentFactory factory = new StudentFactory();
+        dao.add(factory.createFromMap(match));
+        
+        
+        //Student c = new Student((course.get(Student.FIRST_NAME)[0]), course.get(Student.LAST_NAME)[0], Integer.valueOf(course.get(Student.ID)[0]));
+        //addStudent(c);
     }
 
     public void addStudent(Student s) throws ValidationException {

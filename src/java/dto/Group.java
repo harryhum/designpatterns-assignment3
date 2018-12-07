@@ -9,7 +9,7 @@ package dto;
  */
 public class Group {
 
-    public static final String NAME = "first_name";
+    public static final String NAME = "name";
  
     public static final String ID = "id";
     

@@ -42,7 +42,6 @@ public class StudentGroupMatchDAOImpl implements DAOInterface<StudentGroupMatch>
      * Gets all matches in the database
      * @return list of StudentGroupMatch
      */
-    @Override
     public List<StudentGroupMatch> getAllMatches() {
         List<StudentGroupMatch> matches = Collections.emptyList();
         StudentGroupMatch match;
@@ -64,7 +63,6 @@ public class StudentGroupMatchDAOImpl implements DAOInterface<StudentGroupMatch>
      * Adds a match to the database
      * @param match 
      */
-    @Override
     public void addMatch(StudentGroupMatch match) {
         try (Connection con = DataSource.createConnection();
                 PreparedStatement pstmt = con.prepareStatement(INSERT_MATCHES);) {
@@ -82,7 +80,6 @@ public class StudentGroupMatchDAOImpl implements DAOInterface<StudentGroupMatch>
      * @param studentID
      * @return StudentGroupMatch object
      */
-    @Override
     public StudentGroupMatch getMatchByStudentID(int studentID) {
         StudentGroupMatch match = null;
         try (Connection con = DataSource.createConnection()){
@@ -104,7 +101,6 @@ public class StudentGroupMatchDAOImpl implements DAOInterface<StudentGroupMatch>
      * Unimplemented method
      * @param match 
      */
-    @Override
     public void updateMatch(StudentGroupMatch match) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -113,7 +109,6 @@ public class StudentGroupMatchDAOImpl implements DAOInterface<StudentGroupMatch>
      * Delete match from database
      * @param match 
      */
-    @Override
     public void deleteMatch(StudentGroupMatch match) {
         try (Connection con = DataSource.createConnection()) {
             PreparedStatement pstmt = con.prepareStatement(DELETE_MATCHES); 
@@ -123,5 +118,30 @@ public class StudentGroupMatchDAOImpl implements DAOInterface<StudentGroupMatch>
         } catch (SQLException | NamingException ex) {
             Logger.getLogger(StudentGroupMatchDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public List<StudentGroupMatch> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public StudentGroupMatch getById(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void add(StudentGroupMatch t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete(String str) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deleteAll(String[] str) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

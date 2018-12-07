@@ -1,6 +1,7 @@
 package view;
 
 import business.StudentGroupMatchLogic;
+import business.ValidationException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -52,20 +53,27 @@ public class StudentGroupMatchView extends HttpServlet {
             StudentGroupMatchLogic logic = new StudentGroupMatchLogic();
             List<StudentGroupMatch> matches = new ArrayList<>();
             
-            // Add search results to match list if a search was conducted, or add all matches if not
-            if (search) {
-                Logger.getLogger(StudentGroupMatchView.class.getName()).log(Level.INFO, request.getParameter(StudentGroupMatch.COL_STUDENT_ID));
-                int searchID = Integer.parseInt(request.getParameter(StudentGroupMatch.COL_STUDENT_ID));
-                
-                // Add search result to matches if results match search params, or configure error message and add all matches if not
-                if (logic.getMatchByStudentID(searchID) != null) {
-                    matches.add(logic.getMatchByStudentID(searchID));
-                }
-                else {
-                    errorMessage = "No matches with StudentID = " + searchID + " found.";
+            int searchID = 0;
+            
+            try {
+                // Add search results to match list if a search was conducted, or add all matches if not
+                if (search) {
+                    Logger.getLogger(StudentGroupMatchView.class.getName()).log(Level.INFO, request.getParameter(StudentGroupMatch.COL_STUDENT_ID));
+                    searchID = Integer.parseInt(request.getParameter(StudentGroupMatch.COL_STUDENT_ID));
+                    if (logic.getMatchByStudentID(searchID) == null) {
+                        throw new ValidationException();
+                    }   
+                    matches.add(logic.getMatchByStudentID(searchID));    
+                } else {
                     matches = logic.getAllMatches();
                 }
-            } else {
+            } catch (NumberFormatException e) {
+                errorMessage = "Please enter a valid number.";
+            } catch (ValidationException e) {
+                errorMessage = "No matches with StudentID = " + searchID + " found.";
+            }
+            
+            if (errorMessage != null) {
                 matches = logic.getAllMatches();
             }
             
@@ -77,27 +85,13 @@ public class StudentGroupMatchView extends HttpServlet {
             out.println("<th>Date</th>");
             out.println("</tr>");
             
-            // Display error message if not null, or display matches if no error
-            if (matches == null || matches.isEmpty()) {
-                errorMessage = "No matches found.";
-            } else {
-                for (StudentGroupMatch match : matches) {
-                    out.printf("<tr><td>%s</td><td>%s</td><td>%s</td></tr>", match.getStudentID(), match.getGroupID(), match.getDate());
-                }
+            for (StudentGroupMatch match : matches) {
+                out.printf("<tr><td>%s</td><td>%s</td><td>%s</td></tr>", match.getStudentID(), match.getGroupID(), match.getDate());
             }
             
             out.println("</table>");
-            
             out.println("<br><div style=\"text-align: center;\">");
             out.println("<div style=\"display: inline-block; text-align: center;\">");
-            
-            if(errorMessage!=null&&!errorMessage.isEmpty()){
-                out.println("<p color=red>");
-                out.println("<font color=red size=4px>");
-                out.println(errorMessage);
-                out.println("</font>");
-                out.println("</p>");
-            }
             
             // StudentID search form
             out.println("<form action=\"StudentGroupMatchView\" method=\"post\">");
@@ -107,6 +101,14 @@ public class StudentGroupMatchView extends HttpServlet {
             out.printf("<input type=\"text\" name=\"%s\" value=\"\">", StudentGroupMatch.COL_STUDENT_ID);
             out.println("<input type=\"submit\" name=\"search\" value=\"Go\">");
             out.println("</div>");
+            
+            if(errorMessage!=null&&!errorMessage.isEmpty()){
+                out.println("<p color=red>");
+                out.println("<font color=red size=4px>");
+                out.println(errorMessage);
+                out.println("</font>");
+                out.println("</p>");
+            }
             
             out.println("</div>");
             out.println("</div>");
@@ -142,7 +144,7 @@ public class StudentGroupMatchView extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if( request.getParameter("search")!=null){
+        if(request.getParameter("search")!=null){
             search = true;
             processRequest(request, response);
         }

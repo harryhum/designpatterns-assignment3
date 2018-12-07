@@ -3,7 +3,8 @@ package business;
 import dataaccess.StudentGroupMatchDAOImpl;
 import java.util.List;
 import dto.StudentGroupMatch;
-import dto.factory.StudentGroupMatchFactory;
+import dto.factory.DTOFactoryCreator;
+import dto.factory.Factory;
 import java.util.Map;
 
 /**
@@ -12,6 +13,11 @@ import java.util.Map;
  * @author Harry Hum
  */
 public class StudentGroupMatchLogic {
+    
+    /**
+     * StudentGroupMatch factory 
+     */
+    private final Factory<StudentGroupMatch> factory = DTOFactoryCreator.createFactory(StudentGroupMatch.class);
 
     /**
      * StudentGroupMatchDAO object
@@ -37,9 +43,10 @@ public class StudentGroupMatchLogic {
      * Adds a StudentGroupMatch through the DAO
      * @param match - a map of the arguments passed by the servlet POST request 
      */
-    public void addMatch(Map<String, String[]> match) {
-        StudentGroupMatchFactory factory = new StudentGroupMatchFactory();
-        studentGroupMatchDAO.addMatch(factory.createFromMap(match));
+    public void addMatch(Map<String, String[]> match) throws ValidationException {
+        StudentGroupMatch m = factory.createFromMap(match);
+        validateId(m);
+        studentGroupMatchDAO.addMatch(m);
     }
     
     /**
@@ -51,4 +58,15 @@ public class StudentGroupMatchLogic {
         return studentGroupMatchDAO.getMatchByStudentID(id);
     }
 
+    private void validateId(StudentGroupMatch match) throws ValidationException {
+        validateId(match.getGroupID(), StudentGroupMatch.COL_GROUP_ID);
+        validateId(match.getStudentID(), StudentGroupMatch.COL_STUDENT_ID);
+
+    }
+    
+     private void validateId(int id, String fieldName) throws ValidationException {
+        if (id <= 0) {
+            throw new ValidationException(String.format("%s cannot be less than or equal to 0", fieldName));
+        } 
+    }
 }

@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface DAOInterface<T> {
     List<T> getAll();
-    T getById(String id);
+    T getById(int id);
     void add( T t);
     void delete(String str);
     void deleteAll(String[] str);

@@ -29,7 +29,7 @@ public class StudentLogic {
         return dao.getAll();
     }
 
-    public Student getById(String id){
+    public Student getById(int id){
         return dao.getById(id);
         
     }

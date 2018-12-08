@@ -98,7 +98,7 @@ public class StudentDAOImpl implements DAOInterface<Student> {
     }
 
     @Override
-    public Student getById(String id) {
+    public Student getById(int id) {
         Student s = null;
         try (Connection con = DataSource.createConnection();
                 PreparedStatement pstmt = con.prepareStatement(GET_BY_ID_STUDENTS);) {

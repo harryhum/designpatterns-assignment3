@@ -108,11 +108,11 @@ public class GroupDAOImpl implements DAOInterface<Group> {
   
     
     @Override
-    public Group getById(String id) {
+    public Group getById(int id) {
         Group s = null;
         try (Connection con = DataSource.createConnection();
                 PreparedStatement pstmt = con.prepareStatement(GET_BY_ID_GROUPS);) {
-            pstmt.setInt(1, Integer.valueOf(id));
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             
             //ResultSet rs = pstmt.executeQuery()

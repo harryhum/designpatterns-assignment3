@@ -56,7 +56,7 @@ public class GroupTableView extends HttpServlet {
             }
             else {
                 Logger.getLogger(GroupTableView.class.getName()).log(Level.INFO, request.getParameter(Group.ID));
-                String searchID = (request.getParameter(Group.ID));
+                int searchID = (Integer.parseInt(request.getParameter(Group.ID)));
                 
                 // Add search result to results if results match search params, or configure error message and add all results if not
                 if (logic.getById(searchID) != null) {

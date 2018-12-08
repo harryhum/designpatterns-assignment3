@@ -8,12 +8,21 @@ package dto.builder;
 import dto.Group;
 
 /**
- *
+ * hides action of creating objects
  * @author Claire
  */
 public class GroupBuilder {
+    
+    /**
+     * the group we're making
+     */
     private final Group group = new Group();
 
+    /**
+     * sets group name
+     * @param name string to set
+     * @return 
+     */
     public GroupBuilder setName( String name) {
         group.setName(name);
         return this;
@@ -21,11 +30,20 @@ public class GroupBuilder {
     
 
 
+    /**
+     * 
+     * @param code ID to set
+     * @return 
+     */
     public GroupBuilder setId(int code) {
         group.setId(code);
         return this;
     }
 
+    /**
+     * 
+     * @return the group
+     */
     public Group get() {
         return group;
     }

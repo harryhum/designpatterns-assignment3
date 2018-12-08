@@ -21,12 +21,15 @@ import javax.naming.NamingException;
  */
 public class GroupDAOImpl implements DAOInterface<Group> {
 
-    private static final String GET_ALL_GROUPS = "SELECT id, name FROM Group ORDER BY id";
-    private static final String INSERT_GROUPS = "INSERT INTO Group (id, name) VALUES(?, ?)";
-    private static final String DELETE_GROUP = "DELETE FROM Group WHERE id = ?";
-    private static final String DELETE_GROUPS = "DELETE FROM Group WHERE (id) IN ";
-    private static final String UPDATE_GROUPS = "UPDATE Group SET name = ? WHERE id = ?";
-    private static final String GET_BY_ID_GROUPS = "SELECT id, name FROM Group WHERE id = ?";
+    /**
+     * strings for DB query/insert
+     */
+    private static final String GET_ALL_GROUPS = "SELECT id, name FROM Mapmaker.Group ORDER BY id";
+    private static final String INSERT_GROUPS = "INSERT INTO MapMaker.Group (name) VALUES (?)";
+    private static final String DELETE_GROUP = "DELETE FROM Mapmaker.Group WHERE id = ?";
+    private static final String DELETE_GROUPS = "DELETE FROM Mapmaker.Group WHERE (id) IN ";
+    private static final String UPDATE_GROUPS = "UPDATE Mapmaker.Group SET name = ? WHERE id = ?";
+    private static final String GET_BY_ID_GROUPS = "SELECT id, name FROM Mapmaker.Group WHERE id = ?";
 
     private final Factory<Group> factory = DTOFactoryCreator.createFactory(Group.class);
 
@@ -64,8 +67,8 @@ public class GroupDAOImpl implements DAOInterface<Group> {
     public void add(Group group) {
         try (Connection con = DataSource.createConnection();
                 PreparedStatement pstmt = con.prepareStatement(INSERT_GROUPS);) {
-            pstmt.setInt(1, group.getId());
-            pstmt.setString(2, group.getName());
+           
+            pstmt.setString(1, group.getName());
             
             pstmt.executeUpdate();
         } catch (SQLException | NamingException ex) {
@@ -73,6 +76,10 @@ public class GroupDAOImpl implements DAOInterface<Group> {
         }
     }
 
+    /**
+     * removes one student
+     * @param id of student to delete
+     */
     @Override
     public void delete(String id) {
         try (Connection con = DataSource.createConnection();
@@ -84,6 +91,10 @@ public class GroupDAOImpl implements DAOInterface<Group> {
         }
     }
 
+    /**
+     * 
+     * @param str array of IDs to delete
+     */
     @Override
     public void deleteAll(String[] str) {
         StringBuilder query = new StringBuilder(DELETE_GROUPS);
@@ -106,6 +117,11 @@ public class GroupDAOImpl implements DAOInterface<Group> {
     }
 
   
+    /**
+     * 
+     * @param id to query for
+     * @return group with given ID, or null if no such group
+     */
     
     @Override
     public Group getById(String id) {
@@ -118,7 +134,7 @@ public class GroupDAOImpl implements DAOInterface<Group> {
             //ResultSet rs = pstmt.executeQuery()
             if (rs.next()) {
                 GroupFactory factory = new GroupFactory();
-                s= factory.createFromResultSet(rs);
+                s= factory.createFromResultSet(rs, rs.getInt(Group.ID));
                  
                 }
         } catch (SQLException | NamingException ex) {

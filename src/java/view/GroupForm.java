@@ -45,8 +45,8 @@ public class GroupForm extends HttpServlet {
             out.println("<div style=\"text-align: center;\">");
             out.println("<div style=\"display: inline-block; text-align: left;\">");
             out.println("<form action=\"GroupForm\" method=\"post\">");
-            out.println("Group ID:<br>");
-            out.printf("<input type=\"text\" name=\"%s\" value=\"\"><br>",Group.ID);
+            //out.println("Group ID:<br>");
+            //out.printf("<input type=\"text\" name=\"%s\" value=\"\"><br>",Group.ID);
             out.println("Group name:<br>");
             out.printf("<input type=\"text\" name=\"%s\" value=\"\"><br><br>",Group.NAME);
             out.println("<input type=\"submit\" name=\"view\" value=\"Add and View\">");
@@ -113,10 +113,9 @@ public class GroupForm extends HttpServlet {
             GroupLogic logic = new GroupLogic();
             try{
                 logic.addGroup(request.getParameterMap());
-            } catch (NumberFormatException e) {
-                errorMessage = "Please enter a valid number.";
-            } catch(Exception e) {
+            }catch(Exception e){
                 Logger.getLogger(GroupForm.class.getName()).log(Level.SEVERE, null, e);
+                errorMessage = "Unable to add Group";
             }
         };
         if( request.getParameter("add")!=null){
@@ -124,7 +123,6 @@ public class GroupForm extends HttpServlet {
             processRequest(request, response);
         } else if (request.getParameter("view")!=null) {
             addMatch.run();
-            errorMessage = null;
             response.sendRedirect("GroupView");
         }
     }

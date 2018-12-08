@@ -55,6 +55,19 @@ public class StudentView extends HttpServlet {
             if(!search){
                 results = logic.getAllStudents();
             }
+            else{
+                Logger.getLogger(StudentView.class.getName()).log(Level.INFO, request.getParameter(Student.ID));
+                String searchID = (request.getParameter(Student.ID));
+                
+                // Add search result to matches if results match search params, or configure error message and add all matches if not
+                if (logic.getById(searchID) != null) {
+                    results.add(logic.getById(searchID));
+                }
+                else {
+                    errorMessage = "No matches with StudentID = " + searchID + " found.";
+                    results = logic.getAllStudents();
+                }
+            }
             out.println("<table align=\"center\" border=\"1\">");
             out.println("<caption>Students</caption>");
             out.println("<tr>");

@@ -115,6 +115,8 @@ public class StudentForm extends HttpServlet {
             StudentLogic logic = new StudentLogic();
             try{
                 logic.addStudent(request.getParameterMap());
+                } catch (NumberFormatException e) {
+                errorMessage = "Please enter a valid number.";
             }catch(Exception e){
                 Logger.getLogger(StudentForm.class.getName()).log(Level.SEVERE, null, e);
                 errorMessage = "Unable to add Student";

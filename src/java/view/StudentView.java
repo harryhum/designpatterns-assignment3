@@ -1,6 +1,6 @@
 package view;
 
-import business.GroupLogic;
+import business.StudentLogic;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -8,7 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import dto.Group;
+import dto.Student;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,8 +17,8 @@ import java.util.logging.Logger;
  *
  * @author Claire
  */
-public class GroupTableView extends HttpServlet {
-    
+public class StudentView extends HttpServlet {
+
     /**
      * Error message
      */
@@ -28,7 +28,8 @@ public class GroupTableView extends HttpServlet {
       * Determines if a search was conducted
       */
      private boolean search = false;
-
+    
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
@@ -45,41 +46,72 @@ public class GroupTableView extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Group Table</title>");            
+            out.println("<title>Student Table</title>");            
             out.println("</head>");
             out.println("<body>");
             
-            GroupLogic logic = new GroupLogic();
-            List<Group> results = new ArrayList<Group>();
-            if(!(search)){
-                results = logic.getAllGroups();
+            StudentLogic logic = new StudentLogic();
+            List<Student> results = new ArrayList<>();
+            if(!search){
+                results = logic.getAllStudents();
             }
-            else {
-                Logger.getLogger(GroupTableView.class.getName()).log(Level.INFO, request.getParameter(Group.ID));
-                String searchID = (request.getParameter(Group.ID));
+            else{
+                Logger.getLogger(StudentView.class.getName()).log(Level.INFO, request.getParameter(Student.ID));
+                String searchID = (request.getParameter(Student.ID));
                 
-                // Add search result to results if results match search params, or configure error message and add all results if not
+                // Add search result to matches if results match search params, or configure error message and add all matches if not
                 if (logic.getById(searchID) != null) {
                     results.add(logic.getById(searchID));
                 }
                 else {
-                    errorMessage = "No results with ID = " + searchID + " found.";
-                    results = logic.getAllGroups();
+                    errorMessage = "No matches with StudentID = " + searchID + " found.";
+                    results = logic.getAllStudents();
+                }
+            }
+            out.println("<table align=\"center\" border=\"1\">");
+            out.println("<caption>Students</caption>");
+            out.println("<tr>");
+            out.println("<th>Student ID</th>");
+            out.println("<th>Student Name</th>");
+            out.println("</tr>");
+            
+            if (results == null || results.isEmpty()) {
+                errorMessage = "No matches found.";
+            } else {
+                for (Student s : results) {
+                    out.printf("<tr><td>%s</td><td>%s</td></tr>", s.getId(), s.getfName()+" "+ s.getlName());
                 }
             }
             
             
-            out.println("<table align=\"center\" border=\"1\">");
-            out.println("<caption>Groups</caption>");
-            out.println("<tr>");
-            out.println("<th>Group ID</th>");
-            out.println("<th>Group Name</th>");
-            out.println("</tr>");
-            for (Group g : results) {
-                out.printf("<tr><td>%s</td><td>%s</td></tr>", g.getId(), g.getName());
+            out.println("</table>");
+            
+            out.println("<br><div style=\"text-align: center;\">");
+            out.println("<div style=\"display: inline-block; text-align: center;\">");
+            
+            if(errorMessage!=null&&!errorMessage.isEmpty()){
+                out.println("<p color=red>");
+                out.println("<font color=red size=4px>");
+                out.println(errorMessage);
+                out.println("</font>");
+                out.println("</p>");
             }
             
-            out.println("</table>");
+            // StudentID search form
+            out.println("<form action=\"StudentView\" method=\"post\">");
+            out.println("Search Student by Student ID:<br>");
+            
+            out.println("<div style=\"position: relative; left: 50%; transform: translateX(-50%);\">");
+            out.printf("<input type=\"text\" name=\"%s\" value=\"\">", Student.ID);
+            out.println("<input type=\"submit\" name=\"search\" value=\"Go\">");
+            out.println("</div>");
+            
+            out.println("</div>");
+            out.println("</div>");
+            
+            // Reset search to false and error message to null
+            search = false;
+            errorMessage = null;
             out.println("</body>");
             out.println("</html>");
         }

@@ -15,12 +15,19 @@ import java.util.Map;
 /**
  *
  * @author Claire
+ * hides creation of student objects, via the Student Builder
  */
 public class StudentFactory extends  AbstractFactory<Student>{
 
+    /**
+     * 
+     * @param rs from which values are extracted
+     * @return created student
+     * @throws SQLException 
+     */
     @Override
     public Student createFromResultSet(ResultSet rs) throws SQLException {
-        if (rs == null || !rs.next()) {
+        if (rs == null) {
             return null;
         }
         StudentBuilder builder = new StudentBuilder();
@@ -33,7 +40,11 @@ public class StudentFactory extends  AbstractFactory<Student>{
 
   
     
-    
+    /**
+     * 
+     * @param map from which values are extracted
+     * @return created student
+     */
     
     @Override
     public Student createFromMap(Map< String, String[]> map) {

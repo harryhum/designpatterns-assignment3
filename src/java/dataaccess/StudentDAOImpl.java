@@ -18,18 +18,31 @@ import javax.naming.NamingException;
 /**
  *
  * @author Claire
+ * implementation of database access for the STudent table
  */
 public class StudentDAOImpl implements DAOInterface<Student> {
+    
+    /**
+     * convenience strings for DB queries/inserts
+     */
 
     private static final String GET_ALL_STUDENTS = "SELECT id, first_name, last_name FROM Student ORDER BY id";
     private static final String INSERT_STUDENTS = "INSERT INTO Student (id, first_name, last_name) VALUES(?, ?, ?)";
     private static final String DELETE_STUDENT = "DELETE FROM Student WHERE id = ?";
     private static final String DELETE_STUDENTS = "DELETE FROM Student WHERE (id) IN ";
     private static final String UPDATE_STUDENTS = "UPDATE Student SET first_name = ?, last_name = ? WHERE id = ?";
-    private static final String GET_BY_ID_STUDENTS = "SELECT id, first_name, last_name FROM Student WHERE id = ?";
+    private static final String GET_BY_ID_STUDENTS = "SELECT * FROM Student WHERE id = ?";
+    
+    /**
+     * for adding students
+     */
 
     private final Factory<Student> factory = DTOFactoryCreator.createFactory(Student.class);
 
+    /**
+     * 
+     * @return all the students in the DB
+     */
     @Override
     public List<Student> getAll() {
         List<Student> students = Collections.emptyList();
@@ -52,6 +65,10 @@ public class StudentDAOImpl implements DAOInterface<Student> {
         return students;
     }
 
+    /**
+     * 
+     * @param student to add to the DB
+     */
     @Override
     public void add(Student student) {
         try (Connection con = DataSource.createConnection();
@@ -64,6 +81,11 @@ public class StudentDAOImpl implements DAOInterface<Student> {
             Logger.getLogger(StudentDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    /**
+     * 
+     * @param code ID of the student to delete
+     */
 
     @Override
     public void delete(String code) {
@@ -76,6 +98,10 @@ public class StudentDAOImpl implements DAOInterface<Student> {
         }
     }
 
+    /**
+     * delete all students
+     * @param str array of all the IDs to delete
+     */
     @Override
     public void deleteAll(String[] str) {
         StringBuilder query = new StringBuilder(DELETE_STUDENTS);
@@ -97,6 +123,11 @@ public class StudentDAOImpl implements DAOInterface<Student> {
         }
     }
 
+    /**
+     * 
+     * @param id string representing desired ID to find
+     * @return Student with desired ID
+     */
     @Override
     public Student getById(String id) {
         Student s = null;

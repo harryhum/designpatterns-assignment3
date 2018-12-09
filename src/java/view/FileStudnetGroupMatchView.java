@@ -94,7 +94,7 @@ public class FileStudnetGroupMatchView extends HttpServlet{
                 out.println("</p>");
             }
             
-            out.println("<form action=\"StudentGroupMatchView\" method=\"post\">");
+            out.println("<form action=\"FileSudnetGroupMatchView\" method=\"post\">");
             out.println("Search FileStudnetGroupMatch by Student ID:<br>");
             
             out.println("<div style=\"position: relative; left: 50%; transform: translateX(-50%);\">");

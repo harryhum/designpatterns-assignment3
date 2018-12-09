@@ -30,10 +30,6 @@ public class FileStudnetGroupMatchFactory extends AbstractFactory<FileStudnetGro
         return builder.get();
     }
 
-    @Override
-    public List<FileStudnetGroupMatch> createListFromResultSet(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public FileStudnetGroupMatch createFromMap(Map<String, String[]> map) {

@@ -10,9 +10,11 @@ package dto;
  * @author tdesj
  */
 public class FileStudnetGroupMatch {
-    
+    // group id column name
     public static final String GROUP = "group_id";
+    // student id column name
     public static final String STUDENT = "student_id";
+    // file id column name
     public static final String FILE = "file_id";
     
     

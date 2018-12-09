@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package dto.builder;
 
 import dto.FileStudnetGroupMatch;
@@ -13,23 +9,43 @@ import dto.FileStudnetGroupMatch;
  */
 public class FileStudnetGroupMatchBuilder {
     
+    // FSGM object being built
     private final FileStudnetGroupMatch fsgm = new FileStudnetGroupMatch();
 
+    /**
+     * <p>Set FSGM GroupID</p>
+     * @param id 
+     * @return - builder with modification;
+     */
     public FileStudnetGroupMatchBuilder setGroupId( int id) {
         fsgm.setGroupId(id);
         return this;
     }
 
+    /**
+     * <p>Set FSGM StudentID</p>
+     * @param id
+     * @return - builder with modifications
+     */
     public FileStudnetGroupMatchBuilder setStudentId( int id) {
         fsgm.setStudentId(id);
         return this;
     }
     
+    /**
+     * <p>Set FSGM FileID</p>
+     * @param id
+     * @return - builder with modifications 
+     */
     public FileStudnetGroupMatchBuilder setFileId(int id){
         fsgm.setFileId(id);
         return this;
     }
 
+    /**
+     * <p>Get the complete FSGM</p>
+     * @return - THIS FSGM
+     */
     public FileStudnetGroupMatch get() {
         return fsgm;
     }

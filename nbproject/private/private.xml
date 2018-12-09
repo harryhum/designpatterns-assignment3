@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/tdesj/Documents/NetBeansProjects/designpatterns-assignment3/src/java/dto/builder/FileStudnetGroupMatchBuilder.java</file>
-            <file>file:/C:/Users/tdesj/Documents/NetBeansProjects/designpatterns-assignment3/src/java/dto/FileStudnetGroupMatch.java</file>
-            <file>file:/C:/Users/tdesj/Documents/NetBeansProjects/designpatterns-assignment3/web/META-INF/context.xml</file>
+            <file>file:/C:/Users/tdesj/Documents/NetBeansProjects/designpatterns-assignment3/src/java/dto/factory/AbstractFactory.java</file>
+            <file>file:/C:/Users/tdesj/Documents/NetBeansProjects/designpatterns-assignment3/src/java/dto/factory/StudentGroupMatchFactory.java</file>
+            <file>file:/C:/Users/tdesj/Documents/NetBeansProjects/designpatterns-assignment3/src/java/view/StudentGroupMatchForm.java</file>
             <file>file:/C:/Users/tdesj/Documents/NetBeansProjects/designpatterns-assignment3/src/java/view/FileStudnetGroupMatchView.java</file>
             <file>file:/C:/Users/tdesj/Documents/NetBeansProjects/designpatterns-assignment3/src/java/view/FileStudnetGroupMatchForm.java</file>
             <file>file:/C:/Users/tdesj/Documents/NetBeansProjects/designpatterns-assignment3/src/java/business/FileStudnetGroupMatchLogic.java</file>

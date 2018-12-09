@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * <p> Used as intermediary to access the DTO object</p>
  * @author tdesj
  */
 public class FileStudnetGroupMatchLogic {
@@ -30,7 +30,7 @@ public class FileStudnetGroupMatchLogic {
 
     public List<FileStudnetGroupMatch> getAll() {
         return dao.getAll();
-    }
+    }   
     
     public FileStudnetGroupMatch getById(int id){
         return dao.getById(id);
@@ -56,6 +56,11 @@ public class FileStudnetGroupMatchLogic {
         dao.delete(String.valueOf(id));
     }
 
+    /**
+     * <p>Validate each property</p>
+     * @param fsgm
+     * @throws ValidationException 
+     */
     private void validateId(FileStudnetGroupMatch fsgm) throws ValidationException {
         validateId(fsgm.getGroupId(), FileStudnetGroupMatch.GROUP);
         validateId(fsgm.getStudentId(), FileStudnetGroupMatch.STUDENT);

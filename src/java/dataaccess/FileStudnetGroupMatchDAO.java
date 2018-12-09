@@ -27,21 +27,25 @@ import javax.naming.NamingException;
 public class FileStudnetGroupMatchDAO implements DAOInterface<FileStudnetGroupMatch>{
     
     
-            
-    private static final String GET_ALL_GROUPS = "SELECT * FROM mapmaker.filestudnetgroupmatch ORDER BY group_id";
-    private static final String INSERT_GROUPS = "INSERT INTO mapmaker.filestudnetgroupmatch (group_id, student_id, file_id) VALUES(?, ?, ?)";
-    private static final String DELETE_GROUP = "DELETE FROM mapmaker.filestudnetgroupmatch WHERE group_id = ?";
-    private static final String DELETE_STUDENT = "DELETE FROM mapmaker.filestudnetgroupmatch WHERE student_id = ?";
-    private static final String DELETE_FILE = "DELETE FROM mapmaker.filestudnetgroupmatch WHERE file_id = ?";
-    private static final String DELETE_FILES = "DELETE FROM mapmaker.filestudnetgroupmatch WHERE (file_id) IN ";
-    private static final String DELETE_GROUPS = "DELETE FROM mapmaker.filestudnetgroupmatch WHERE (group_id) IN ";
-    private static final String DELETE_STUDENTS = "DELETE FROM mapmaker.filestudnetgroupmatch WHERE (student_id) IN ";
-    private static final String GET_BY_GROUP = "SELECT * FROM mapmaker.filestudnetgroupmatch WHERE group_id = ?";
-    private static final String GET_BY_STUDENT = "SELECT * FROM mapmaker.filestudnetgroupmatch WHERE student_id = ?";
-    private static final String GET_BY_FILE = "SELECT * FROM mapmaker.filestudnetgroupmatch WHERE file_id = ?";
+            // Various SQL statements for given expected results
+    private static final String GET_ALL_GROUPS = "SELECT * FROM filestudnetgroupmatch ORDER BY group_id";
+    private static final String INSERT_GROUPS = "INSERT INTO filestudnetgroupmatch (group_id, student_id, file_id) VALUES(?, ?, ?)";
+    private static final String DELETE_GROUP = "DELETE FROM filestudnetgroupmatch WHERE group_id = ?";
+    private static final String DELETE_STUDENT = "DELETE FROM filestudnetgroupmatch WHERE student_id = ?";
+    private static final String DELETE_FILE = "DELETE FROM filestudnetgroupmatch WHERE file_id = ?";
+    private static final String DELETE_FILES = "DELETE FROM filestudnetgroupmatch WHERE (file_id) IN ";
+    private static final String DELETE_GROUPS = "DELETE FROM filestudnetgroupmatch WHERE (group_id) IN ";
+    private static final String DELETE_STUDENTS = "DELETE FROM filestudnetgroupmatch WHERE (student_id) IN ";
+    private static final String GET_BY_GROUP = "SELECT * FROM filestudnetgroupmatch WHERE group_id = ?";
+    private static final String GET_BY_STUDENT = "SELECT * FROM filestudnetgroupmatch WHERE student_id = ?";
+    private static final String GET_BY_FILE = "SELECT * FROM filestudnetgroupmatch WHERE file_id = ?";
 
     private final Factory<FileStudnetGroupMatch> factory = DTOFactoryCreator.createFactory(FileStudnetGroupMatch.class);
     
+    /**
+     * <p>Get all entries on the FSGM table</p>
+     * @return results from given query
+     */
     @Override
     public List<FileStudnetGroupMatch> getAll() {
         List<FileStudnetGroupMatch> list = Collections.emptyList();
@@ -49,8 +53,9 @@ public class FileStudnetGroupMatchDAO implements DAOInterface<FileStudnetGroupMa
         try (Connection conn = DataSource.createConnection();
             PreparedStatement pstmt = conn.prepareStatement(GET_ALL_GROUPS);
             ResultSet rs = pstmt.executeQuery();) {
-            list = factory.createListFromResultSet(rs);
-            //list = new ArrayList<>(100);
+            //find a way to implement factory
+            //list = factory.createListFromResultSet(rs);
+            list = new ArrayList<>(100);
             while(rs.next()){
                 fsg = new FileStudnetGroupMatch();
                 fsg.setGroupId(rs.getInt(FileStudnetGroupMatch.GROUP));
@@ -67,7 +72,10 @@ public class FileStudnetGroupMatchDAO implements DAOInterface<FileStudnetGroupMa
         return list;
     }
     
-
+    /**
+     * <p>Delete entry at this location by student ID</p>
+     * @param id 
+     */
     @Override
     public void delete(String id) {
     try (Connection con = DataSource.createConnection();
@@ -80,6 +88,10 @@ public class FileStudnetGroupMatchDAO implements DAOInterface<FileStudnetGroupMa
     }    
     
 
+    /**
+     * <p>delete all entries for given array by student id</p>
+     * @param str 
+     */
     @Override
     public void deleteAll(String[] str) {
     StringBuilder query = new StringBuilder(DELETE_STUDENTS);
@@ -103,6 +115,10 @@ public class FileStudnetGroupMatchDAO implements DAOInterface<FileStudnetGroupMa
         }    
     }
 
+    /**
+     * <p>Add FSGM to database</p>
+     * @param fsgm 
+     */
     @Override
     public void add(FileStudnetGroupMatch fsgm) {
         try (Connection con = DataSource.createConnection();
@@ -118,6 +134,11 @@ public class FileStudnetGroupMatchDAO implements DAOInterface<FileStudnetGroupMa
         }
     }
 
+    /**
+     * <p>Retrieve FSGM with given Student ID </p>
+     * @param id
+     * @return 
+     */
     @Override
     public FileStudnetGroupMatch getById(int id) {
         FileStudnetGroupMatch fsgm = null;

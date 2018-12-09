@@ -18,6 +18,13 @@ import java.util.Map;
  */
 public class FileStudnetGroupMatchFactory extends AbstractFactory<FileStudnetGroupMatch>{
 
+    
+    /**
+     * <p>Create instance of FSGM from Result Set using builder</p>
+     * @param rs - Result Set (query)
+     * @return - FSGM built by builder class
+     * @throws SQLException 
+     */
     @Override
     public FileStudnetGroupMatch createFromResultSet(ResultSet rs) throws SQLException {
         if (rs == null || !rs.next()){
@@ -30,7 +37,12 @@ public class FileStudnetGroupMatchFactory extends AbstractFactory<FileStudnetGro
         return builder.get();
     }
 
-
+/**
+* <p>Create instance of FSGM from Map using builder</p>
+     * @param map - map used to create FSGM
+     * @return - FSGM built by builder class
+     
+ */
     @Override
     public FileStudnetGroupMatch createFromMap(Map<String, String[]> map) {
         if ( map == null || map.isEmpty()){

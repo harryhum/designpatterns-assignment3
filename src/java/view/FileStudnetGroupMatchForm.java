@@ -39,7 +39,7 @@ public class FileStudnetGroupMatchForm extends HttpServlet {
             out.println("<body>");
             out.println("<div style=\"text-align: center;\">");
             out.println("<div style=\"display: inline-block; text-align: left;\">");
-            out.println("<form action=\"FileStudnetGroupMatch\" method=\"post\">");
+            out.println("<form action=\"FileStudnetGroupMatchForm\" method=\"post\">");
             out.println("Group ID:<br>");
             out.printf("<input type=\"text\" name=\"%s\" value=\"\"><br>",FileStudnetGroupMatch.GROUP);
             out.println("Student ID:<br>");
@@ -99,10 +99,10 @@ public class FileStudnetGroupMatchForm extends HttpServlet {
                 errorMessage = "Unable to add FileStudnetGroupMatch";
             }
         };
-        if( request.getParameter("add")!=null){
+        if( request.getParameter("add1")!=null){
             add.run();
             processRequest(request, response);
-        } else if (request.getParameter("view")!=null) {
+        } else if (request.getParameter("view1")!=null) {
             add.run();
             response.sendRedirect("FileStudnetGroupMatchView");
         }

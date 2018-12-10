@@ -30,6 +30,24 @@
         <servlet-class>view.StudentView</servlet-class>
     </servlet>
     
+    <servlet>
+        <servlet-name>FileStudnetGroupMatchView</servlet-name>
+        <servlet-class>view.FileStudnetGroupMatchView</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FileStudnetGroupMatchForm</servlet-name>
+        <servlet-class>view.FileStudnetGroupMatchForm</servlet-class>
+    </servlet>
+   
+    <servlet-mapping>
+        <servlet-name>FileStudnetGroupMatchView</servlet-name>
+        <url-pattern>/FileStudnetGroupMatchView</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FileStudnetGroupMatchForm</servlet-name>
+        <url-pattern>/FileStudnetGroupMatchForm</url-pattern>
+    </servlet-mapping>
+    
 
     <servlet-mapping>
         <servlet-name>StudentGroupMatchView</servlet-name>

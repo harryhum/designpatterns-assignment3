@@ -24,7 +24,7 @@ import javax.naming.NamingException;
  *
  * @author tdesj
  */
-public class FileStudnetGroupMatchDAO implements DAOInterface<FileStudnetGroupMatch>{
+public class FileStudnetGroupMatchDAO implements FSGMDAOInterface<FileStudnetGroupMatch>{
     
     
             // Various SQL statements for given expected results

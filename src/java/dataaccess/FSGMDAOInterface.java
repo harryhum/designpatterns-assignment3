@@ -12,7 +12,7 @@ import java.util.List;
  * @author Shawn
  * @param <T> - type of DTO to be used in this interface
  */
-public interface DAOInterface<T> {
+public interface FSGMDAOInterface<T> {
     List<T> getAll();
     T getById(int id);
     void add( T t);

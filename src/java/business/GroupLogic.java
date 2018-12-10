@@ -3,10 +3,10 @@
 import dataaccess.GroupDAOImpl;
 import java.util.List;
 import dto.Group;
-import dataaccess.DAOInterface;
 import dto.factory.DTOFactoryCreator;
 import dto.factory.Factory;
 import java.util.Map;
+import dataaccess.FSGMDAOInterface;
 
 /**
  *
@@ -17,7 +17,7 @@ public class GroupLogic {
     private static final int COURSE_CODE_MAX_LENGTH = 45;
     private static final int GROUP_NAME_MAX_LENGTH = 45;
 
-    private DAOInterface<Group> dao = null;
+    private FSGMDAOInterface<Group> dao = null;
     private Factory<Group> factory = null;
 
     public GroupLogic() {

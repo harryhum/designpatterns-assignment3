@@ -3,10 +3,10 @@
 import dataaccess.StudentDAOImpl;
 import java.util.List;
 import dto.Student;
-import dataaccess.DAOInterface;
 import dto.factory.DTOFactoryCreator;
 import dto.factory.Factory;
 import java.util.Map;
+import dataaccess.FSGMDAOInterface;
 
 /**
  *
@@ -17,7 +17,7 @@ public class StudentLogic {
     private static final int COURSE_CODE_MAX_LENGTH = 45;
     private static final int STUD_NAME_MAX_LENGTH = 45;
 
-    private DAOInterface<Student> dao = null;
+    private FSGMDAOInterface<Student> dao = null;
     private Factory<Student> factory = null;
 
     public StudentLogic() {

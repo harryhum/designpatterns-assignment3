@@ -5,13 +5,13 @@
  */
 package business;
 
-import dataaccess.DAOInterface;
 import dataaccess.FileStudnetGroupMatchDAO;
 import dto.FileStudnetGroupMatch;
 import dto.factory.Factory;
 import dto.factory.DTOFactoryCreator;
 import java.util.List;
 import java.util.Map;
+import dataaccess.FSGMDAOInterface;
 
 /**
  * <p> Used as intermediary to access the DTO object</p>
@@ -20,7 +20,7 @@ import java.util.Map;
 public class FileStudnetGroupMatchLogic {
     
 
-    private DAOInterface<FileStudnetGroupMatch> dao = null;
+    private FSGMDAOInterface<FileStudnetGroupMatch> dao = null;
     private Factory<FileStudnetGroupMatch> factory = null;
 
     public FileStudnetGroupMatchLogic() {

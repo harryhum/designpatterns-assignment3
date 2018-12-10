@@ -29,7 +29,7 @@ public class GroupLogic {
         return dao.getAll();
     }
 
-    public Group getById(int id){
+    public Group getById(String id){
         return dao.getById(id);
         
     }

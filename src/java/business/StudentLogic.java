@@ -6,7 +6,7 @@ import dto.Student;
 import dto.factory.DTOFactoryCreator;
 import dto.factory.Factory;
 import java.util.Map;
-import dataaccess.FSGMDAOInterface;
+import dataaccess.DAOInterface;
 
 /**
  *
@@ -17,7 +17,7 @@ public class StudentLogic {
     private static final int COURSE_CODE_MAX_LENGTH = 45;
     private static final int STUD_NAME_MAX_LENGTH = 45;
 
-    private FSGMDAOInterface<Student> dao = null;
+    private DAOInterface<Student> dao = null;
     private Factory<Student> factory = null;
 
     public StudentLogic() {
@@ -29,7 +29,7 @@ public class StudentLogic {
         return dao.getAll();
     }
 
-    public Student getById(int id){
+    public Student getById(String id){
         return dao.getById(id);
         
     }

@@ -19,7 +19,7 @@ import javax.naming.NamingException;
  *
  * @author Claire
  */
-public class StudentDAOImpl implements FSGMDAOInterface<Student> {
+public class StudentDAOImpl implements DAOInterface<Student> {
 
     private static final String GET_ALL_STUDENTS = "SELECT id, first_name, last_name FROM Student ORDER BY id";
     private static final String INSERT_STUDENTS = "INSERT INTO Student (id, first_name, last_name) VALUES(?, ?, ?)";

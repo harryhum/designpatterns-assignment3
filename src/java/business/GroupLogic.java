@@ -6,7 +6,7 @@ import dto.Group;
 import dto.factory.DTOFactoryCreator;
 import dto.factory.Factory;
 import java.util.Map;
-import dataaccess.FSGMDAOInterface;
+import dataaccess.DAOInterface;
 
 /**
  *

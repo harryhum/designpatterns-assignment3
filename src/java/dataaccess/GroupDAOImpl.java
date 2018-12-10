@@ -19,7 +19,7 @@ import javax.naming.NamingException;
  *
  * @author Claire
  */
-public class GroupDAOImpl implements FSGMDAOInterface<Group> {
+public class GroupDAOImpl implements DAOInterface<Group> {
 
     private static final String GET_ALL_GROUPS = "SELECT id, name FROM Group ORDER BY id";
     private static final String INSERT_GROUPS = "INSERT INTO Group (id, name) VALUES(?, ?)";
@@ -108,11 +108,11 @@ public class GroupDAOImpl implements FSGMDAOInterface<Group> {
   
     
     @Override
-    public Group getById(int id) {
+    public Group getById(String id) {
         Group s = null;
         try (Connection con = DataSource.createConnection();
                 PreparedStatement pstmt = con.prepareStatement(GET_BY_ID_GROUPS);) {
-            pstmt.setInt(1, id);
+            pstmt.setInt(1, Integer.valueOf(id));
             ResultSet rs = pstmt.executeQuery();
             
             //ResultSet rs = pstmt.executeQuery()

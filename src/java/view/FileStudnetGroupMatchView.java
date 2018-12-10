@@ -8,7 +8,6 @@ package view;
 import business.FileStudnetGroupMatchLogic;
 import business.ValidationException;
 import dto.FileStudnetGroupMatch;
-import dto.StudentGroupMatch;
 import java.io.IOException;
 import java.lang.NumberFormatException;
 import java.io.PrintWriter;

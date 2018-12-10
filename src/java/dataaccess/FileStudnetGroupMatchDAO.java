@@ -83,7 +83,7 @@ public class FileStudnetGroupMatchDAO implements FSGMDAOInterface<FileStudnetGro
             pstmt.setInt(1, Integer.valueOf(id));
             pstmt.executeUpdate();
         } catch (SQLException | NamingException ex) {
-            Logger.getLogger(GroupDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FileStudnetGroupMatch.class.getName()).log(Level.SEVERE, null, ex);
         }
     }    
     

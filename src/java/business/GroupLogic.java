@@ -17,7 +17,7 @@ public class GroupLogic {
     private static final int COURSE_CODE_MAX_LENGTH = 45;
     private static final int GROUP_NAME_MAX_LENGTH = 45;
 
-    private FSGMDAOInterface<Group> dao = null;
+    private DAOInterface<Group> dao = null;
     private Factory<Group> factory = null;
 
     public GroupLogic() {
